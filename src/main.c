@@ -1,6 +1,7 @@
+# include <stdio.h>
+# include <stdlib.h>
+# include <locale.h>
 
-<<<<<<< Updated upstream
-=======
 # define fileiras 10
 # define assentos 8
 
@@ -12,4 +13,3 @@ int main() {
     system("pause");
     return 0;
 }
->>>>>>> Stashed changes
