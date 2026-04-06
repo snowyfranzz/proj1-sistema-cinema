@@ -6,7 +6,7 @@
 # define assentos 8
 
 int main() {
-
+    setlocale(LC_ALL, "portuguese");
 
     printf("fileiras: %d assentos: %d\n\n", fileiras, assentos);
 
