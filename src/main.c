@@ -6,7 +6,8 @@
 # define assentos 8
 
 int main() {
-    int teatro[fileiras][assentos], i, j, totalLivres;
+    int teatro[fileiras][assentos], i, j, repeat = 0, total = fileiras * assentos, totalLivres;
+    float porcent;
 
     setlocale(LC_ALL, "portuguese");
 
@@ -18,70 +19,69 @@ int main() {
     }
 
     do {
+        system("cls");
+        //imprime numero de linhas/colunas
+        printf("Fileiras: %d | Assentos: %d\n\n", fileiras, assentos);
 
-    system("cls");
+        totalLivres = 0;
 
-    //imprime numero de linhas/colunas
-    printf("Fileiras: %d | Assentos: %d\n\n", fileiras, assentos);
-
-    //imprime matriz
-    for (i = 0; i < fileiras; i++) {
-        printf("\n\t%2d  ", i + 1);
-        for (j = 0; j < assentos; j++) {
-            printf("%d ", teatro[i][j]);
+        //calcula os assentos livres
+        for (i = 0; i < fileiras; i++) {
+            for (j = 0; j < assentos; j++) {
+                if (teatro[i][j] == 0) {
+                    totalLivres++;
+                }
+            }
         }
-        printf(" %d", i + 1);
-    }
+
+        printf("Livres: %d\nOcupados: %d\n", totalLivres, total - totalLivres);
+
+        porcent = (float) (total - totalLivres)/total * 100;
+
+        printf("Percentual de ocupação: %%%.1f\n\n", porcent);
+
+        //imprime matriz
+        for (i = 0; i < fileiras; i++) {
+            printf("\n\t%2d  ", i + 1);
+            for (j = 0; j < assentos; j++) {
+                printf("%d ", teatro[i][j]);
+            }
+            printf(" %d", i + 1);
+        }
 
         // escolha a fileira
         printf("\n\nEscolha a sua fileira: ");
         scanf("%d", &i);
-    } while (i < 1 || i > fileiras);
 
-    i--;
+        if (i < 1 || i > fileiras) {
+            break;
+        }
 
-    do {
-
-    system("cls");
-
-    //imprime fileira
-    printf("\n\t%2d  ", i + 1);
-    for (j = 0; j < assentos; j++) {
-        printf("%d ", teatro[i][j]);
-    }
-    printf(" %d", i + 1);
-
-    // escolha a fileira
-        printf("\n\nEscolha a sua Cadeira: ");
-        scanf("%d", &j);
-
-    } while (j < 1 || j > assentos);
+        i--;
 
 
-    j--;
-
-    teatro[i][j] = 1;
-
-    //imprime matriz final
-    for (i = 0; i < fileiras; i++) {
+        //imprime fileira
         printf("\n\t%2d  ", i + 1);
         for (j = 0; j < assentos; j++) {
             printf("%d ", teatro[i][j]);
         }
         printf(" %d", i + 1);
-    }
 
-    for (i = 0; i < fileiras; i++) {
-        for (j = 0; j < assentos; j++) {
-            if (teatro[i][j] == 0) {
-                totalLivres++;
-            }
+        // escolha a fileira
+        printf("\n\nEscolha a sua Cadeira: ");
+        scanf("%d", &j);
+
+        if (j < 1 || j > assentos) {
+            break;
         }
-    }
 
-    printf("\n\n");
+        j--;
 
-    printf("Livres: %d\nOcupados: %d\n\n", totalLivres, (fileiras * assentos) - totalLivres);
+        teatro[i][j] = 1;
+
+        printf("\n Continue? (1 ou 0): ");
+        scanf("%d", &repeat);
+     } while (repeat == 1);
 
     system("pause");
     return 0;
