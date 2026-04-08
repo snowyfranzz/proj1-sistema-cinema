@@ -19,10 +19,10 @@ int main() {
 
     //imprime matriz
     for (i = 0; i < fileiras; i++) {
-            printf("\n");
         for (j = 0; j < assentos; j++) {
             printf("%d ", teatro[i][j]);
         }
+        printf("\n");
     }
 
     //imprime numero de linhas/colunas
