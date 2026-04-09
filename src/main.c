@@ -89,11 +89,15 @@ int main() {
                 entropy += (i - metadeLin);
             }
             //aumenta se estiver perto de um lugar reservado
-            if (teatro[i + 1][j] == 11 && i + 1 <= fileiras) {
-                entropy++;
+            if (i + 1 < fileiras) {
+                if (teatro[i + 1][j] == 11) {
+                    entropy++;
+                }
             }
-            if (teatro[i - 1][j] == 11  && i - 1 >= 0) {
-                entropy ++;
+            if (i - 1 >= 0) {
+                if (teatro[i - 1][j] == 11) {
+                    entropy ++;
+                }
             }
 
 
@@ -107,11 +111,15 @@ int main() {
             }
 
             //aumenta + 2 se estiver do lado de um lugar reservado
-            if (teatro[i][j + 1] == 11 && j + 1 <= assentos) {
-                entropy += 2;
+            if (j + 1 < assentos) {
+                if (teatro[i][j + 1] == 11) {
+                    entropy += 2;
+                }
             }
-            if (teatro[i][j - 1] == 11 && j - 1 >= 0) {
-                entropy += 2;
+            if (j - 1 >= 0) {
+                if (teatro[i][j - 1] == 11) {
+                    entropy += 2;
+                }
             }
 
             //colocar o valor da entropia (que tão não-recomendado é o lugar) na posição
