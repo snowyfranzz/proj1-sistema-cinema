@@ -8,7 +8,6 @@
 //protótipo do algoritmo que pode determinar quais lugares são mais recomendados que outros
 //se chama "mapa de calor" porque achei similar a esses mapas. Em vez de usar cores, uso um contador
 
-
 //uso:
 
     //o primeiro bloco é responsável por te deixar colocar lugares que já estão reservados.
@@ -22,16 +21,9 @@
     //o valor da entropia depois é guardado no lugar da matriz para mostrar o mapa de calor resultante
 
 int main() {
-    int teatro[fileiras][assentos], cont = 1, entropy = 0, metadeLin = fileiras / 2, metadeCol = assentos / 2, i, j;
+    int teatro[fileiras][assentos] = {0}, cont = 1, entropy = 0, metadeLin = fileiras / 2, metadeCol = assentos / 2, i, j;
 
     setlocale(LC_ALL, "portuguese");
-
-    //cada valor da matriz começa = 0
-    for (i = 0; i < fileiras; i++) {
-        for (j = 0; j < assentos; j++) {
-            teatro[i][j] = 0;
-        }
-    }
 
     do {
         //limpa o terminal
@@ -48,7 +40,7 @@ int main() {
         }
 
         //pede a localização da linha (de 1 a "fileiras")
-        printf("Linha: ");
+        printf("\nLinha: ");
         scanf("%d", &i);
 
         //pede a localização da coluna (de 1 a "assentos")
@@ -57,7 +49,8 @@ int main() {
 
         //se for uma localização fora da matriz, avisa que é invalido e pede se sair do loop ou não
         if (i < 1 || i > fileiras || j < 1 || j > assentos) {
-            printf("\ninvalido\n\n Continuar? (1 ou 0): ");
+            system("cls");
+            printf("\nINVÁLIDO\n\nContinuar? (1 ou 0): ");
             scanf("%d", &cont);
         } else {
             //se for localização valida
@@ -132,11 +125,12 @@ int main() {
     //imprime mapa de calor
     for (i = 0; i < fileiras; i++) {
         for (j = 0; j < assentos; j++) {
-            printf("%02d ", teatro[i][j]);
+            printf("%2d ", teatro[i][j]);
         }
         printf("\n");
     }
 
+    printf("\n");
 
     system("pause");
     return 0;
