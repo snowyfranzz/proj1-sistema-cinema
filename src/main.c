@@ -21,7 +21,7 @@
     //o valor da entropia depois é guardado no lugar da matriz para mostrar o mapa de calor resultante
 
 int main() {
-    int teatro[fileiras][assentos] = {0}, cont = 1, entropy = 0, metadeLin = fileiras / 2, metadeCol = assentos / 2, i, j;
+    int teatro[fileiras][assentos] = {0}, cont = 1, entropy = 0, minEnt = 999, metadeLin = fileiras / 2, metadeCol = assentos / 2, i, j, k, N;
 
     setlocale(LC_ALL, "portuguese");
 
@@ -33,7 +33,7 @@ int main() {
         for (i = 0; i < fileiras; i++) {
             for (j = 0; j < assentos; j++) {
                 //colunas
-                printf("%02d ", teatro[i][j]);
+                printf("%2d ", teatro[i][j]);
             }
             //linhas
             printf("\n");
@@ -63,6 +63,10 @@ int main() {
             teatro[i][j] = 11;
         }
     } while (cont != 0); //continue o loop até o usuario mudar cont para 0 (cont armazena se o jogador quer continuar depois de colocar um valor invalido)
+
+    system("cls");
+    printf("\nNumero de pessoas: ");
+    scanf("%d", &N);
 
     //limpa a tela de novo
     system("cls");
@@ -122,6 +126,31 @@ int main() {
         }
     }
 
+
+    for (i = 0; i < fileiras; i++) {
+        for (j = 0; j < assentos; j++) {
+
+            entropy = 0;
+            for (k = 0; k < N; k++) {
+                if (teatro[i][j + k] == 11) {
+                    entropy = 999;
+                    break;
+                }
+
+                if (j + k < assentos) {
+                    entropy += teatro[i][j + k];
+                } else {
+                    entropy = 999;
+                    break;
+                }
+            }
+
+            if (entropy < minEnt) {
+                minEnt = entropy;
+            }
+        }
+    }
+
     //imprime mapa de calor
     for (i = 0; i < fileiras; i++) {
         for (j = 0; j < assentos; j++) {
@@ -130,6 +159,7 @@ int main() {
         printf("\n");
     }
 
+    printf("menorsoma: %d\n", minEnt);
     printf("\n");
 
     system("pause");
