@@ -21,7 +21,7 @@
     //o valor da entropia depois é guardado no lugar da matriz para mostrar o mapa de calor resultante
 
 int main() {
-    int teatro[fileiras][assentos] = {0}, cont = 1, entropy = 0, minEnt = 999, metadeLin = fileiras / 2, metadeCol = assentos / 2, i, j, k, N;
+    int teatro[fileiras][assentos] = {0}, cont = 1, entropy = 0, minEnt = 999, metadeLin = fileiras / 2, metadeCol = assentos / 2, i, j, k, N, teste;
 
     setlocale(LC_ALL, "portuguese");
 
@@ -32,27 +32,30 @@ int main() {
         //imprime matriz
         for (i = 0; i < fileiras; i++) {
             for (j = 0; j < assentos; j++) {
-                //colunas
                 printf("%2d ", teatro[i][j]);
             }
-            //linhas
             printf("\n");
         }
 
         //pede a localização da linha (de 1 a "fileiras")
         printf("\nLinha: ");
-        scanf("%d", &i);
+        teste = scanf("%d", &i);
+        while(getchar() != '\n');
+        if (!teste) {
+            i = 0;
+        }
 
         //pede a localização da coluna (de 1 a "assentos")
         printf("\nColuna: ");
-        scanf("%d", &j);
+        teste = scanf("%d", &j);
+        while(getchar() != '\n');
+        if (!teste) {
+            j = 0;
+        }
+
 
         //se for uma localização fora da matriz, avisa que é invalido e pede se sair do loop ou não
-        if (i < 1 || i > fileiras || j < 1 || j > assentos) {
-            system("cls");
-            printf("\nINVÁLIDO\n\nContinuar? (1 ou 0): ");
-            scanf("%d", &cont);
-        } else {
+        if (i > 0 && i <= fileiras && j > 0 && j <= assentos) {
             //se for localização valida
 
             //decrementa os valores recebidos (para transformar em coordenadas de matriz em C)
@@ -61,12 +64,20 @@ int main() {
 
             //coloca o numero "11" naquela localização
             teatro[i][j] = 11;
+        } else {
+            system("cls");
+            printf("\nINVÁLIDO\n\nContinuar? (1 ou 0): ");
+            scanf("%d", &cont);
+            while(getchar() != '\n');
         }
     } while (cont != 0); //continue o loop até o usuario mudar cont para 0 (cont armazena se o jogador quer continuar depois de colocar um valor invalido)
 
-    system("cls");
-    printf("\nNumero de pessoas: ");
-    scanf("%d", &N);
+    do {
+        system("cls");
+        printf("\nNumero de pessoas: ");
+        teste = scanf("%d", &N);
+        while(getchar() != '\n');
+    } while (!teste);
 
     //limpa a tela de novo
     system("cls");
