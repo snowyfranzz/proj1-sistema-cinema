@@ -26,7 +26,6 @@ int main() {
     setlocale(LC_ALL, "portuguese");
 
     do {
-        //limpa o terminal
         system("cls");
 
         //imprime matriz
@@ -37,7 +36,7 @@ int main() {
             printf("\n");
         }
 
-        //pede a localização da linha (de 1 a "fileiras")
+        //localização da linha (de 1 a "fileiras")
         printf("\nLinha: ");
         teste = scanf("%d", &i);
         while(getchar() != '\n');
@@ -45,7 +44,7 @@ int main() {
             i = 0;
         }
 
-        //pede a localização da coluna (de 1 a "assentos")
+        //localização da coluna (de 1 a "assentos")
         printf("\nColuna: ");
         teste = scanf("%d", &j);
         while(getchar() != '\n');
@@ -53,24 +52,20 @@ int main() {
             j = 0;
         }
 
-
-        //se for uma localização fora da matriz, avisa que é invalido e pede se sair do loop ou não
         if (i > 0 && i <= fileiras && j > 0 && j <= assentos) {
-            //se for localização valida
+            //localização valida
 
-            //decrementa os valores recebidos (para transformar em coordenadas de matriz em C)
+            //transformar em coordenadas de matriz em C
             i--;
             j--;
-
-            //coloca o numero "11" naquela localização
-            teatro[i][j] = 11;
+            teatro[i][j] = 11; //assento reservado
         } else {
             system("cls");
             printf("\nINVÁLIDO\n\nContinuar? (1 ou 0): ");
             scanf("%d", &cont);
             while(getchar() != '\n');
         }
-    } while (cont != 0); //continue o loop até o usuario mudar cont para 0 (cont armazena se o jogador quer continuar depois de colocar um valor invalido)
+    } while (cont != 0); //continue o loop até o usuario mudar cont para 0
 
     do {
         system("cls");
@@ -79,14 +74,13 @@ int main() {
         while(getchar() != '\n');
     } while (!teste);
 
-    //limpa a tela de novo
     system("cls");
 
-    //algoritmo - mapa de calor
+    //mapa de calor
     for (i = 0; i < fileiras; i++) {
         for (j = 0; j < assentos; j++) {
 
-            entropy = 0;
+            entropy = 0; //calor
 
             //LINHAS
 
@@ -130,20 +124,23 @@ int main() {
                 }
             }
 
-            //colocar o valor da entropia (que tão não-recomendado é o lugar) na posição
+            //guarda o valor final na matriz
             if (teatro[i][j] != 11) {
                 teatro[i][j] = entropy;
             }
         }
     }
 
-
+    //calcula menor soma
     for (i = 0; i < fileiras; i++) {
         for (j = 0; j < assentos; j++) {
 
             entropy = 0;
+
+            //N == ingressantes
             for (k = 0; k < N; k++) {
                 if (teatro[i][j + k] == 11) {
+                    //não somar valores das reservas
                     entropy = 999;
                     break;
                 }
@@ -151,6 +148,7 @@ int main() {
                 if (j + k < assentos) {
                     entropy += teatro[i][j + k];
                 } else {
+                    //não somar valores fora da matriz
                     entropy = 999;
                     break;
                 }
