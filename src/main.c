@@ -59,6 +59,10 @@ int main() {
     for (i = 0; i < fileiras; i++) {
         for (j = 0; j < assentos; j++) {
 
+            if (teatro[i][j] == 11) {
+                continue;
+            }
+
             entropy = 0;
 
             if (i < metadeLin) {
@@ -93,9 +97,7 @@ int main() {
                 }
             }
 
-            if (teatro[i][j] != 11) {
-                teatro[i][j] = entropy;
-            }
+            teatro[i][j] = entropy;
         }
     }
 
@@ -105,12 +107,7 @@ int main() {
             entropy = 0;
 
             for (k = 0; k < N; k++) {
-                if (teatro[i][j + k] == 11) {
-                    entropy = 999;
-                    break;
-                }
-
-                if (j + k < assentos) {
+                if (j + k < assentos && teatro[i][j + k] != 11) {
                     entropy += teatro[i][j + k];
                 } else {
                     entropy = 999;
