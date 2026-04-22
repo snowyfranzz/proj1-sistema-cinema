@@ -8,7 +8,7 @@
 # define metadeCol assentos / 2
 
 int main() {
-    int teatro[fileiras][assentos] = {0}, cont = 1, entropy = 0, minEnt = 999, i, j, k, N, c;
+    int teatro[fileiras][assentos] = {0}, cont = 1, entropy, entropyLin, minEnt = 999, i, j, k, ingressos, c, minEsquerdo = 0, fil = 0;
     setlocale(LC_ALL, "portuguese");
 
     do {
@@ -48,11 +48,11 @@ int main() {
     do {
         system("cls");
         printf("\nNumero de pessoas: ");
-        if (scanf("%d", &N) == 0) {
-            N = 0;
+        if (scanf("%d", &ingressos) == 0) {
+            ingressos = 0;
         }
         while((c = getchar()) != '\n' && c != EOF);
-    } while (!N);
+    } while (!ingressos);
 
     system("cls");
 
@@ -103,33 +103,66 @@ int main() {
 
     for (i = 0; i < fileiras; i++) {
         for (j = 0; j < assentos; j++) {
-
-            entropy = 0;
-
-            for (k = 0; k < N; k++) {
-                if (j + k < assentos && teatro[i][j + k] != 11) {
-                    entropy += teatro[i][j + k];
-                } else {
-                    entropy = 999;
-                    break;
-                }
-            }
-
-            if (entropy < minEnt) {
-                minEnt = entropy;
-            }
-        }
-    }
-
-    for (i = 0; i < fileiras; i++) {
-        for (j = 0; j < assentos; j++) {
             printf("%2d ", teatro[i][j]);
         }
         printf("\n");
     }
 
-    printf("menorsoma: %d\n", minEnt);
-    printf("\n");
+    for (i = 0; i < fileiras; i++) {
+            entropyLin = 0;
+
+            if (i < metadeLin) {
+                entropyLin += (metadeLin - (i + 1));
+            } else {
+                entropyLin += (i - metadeLin);
+            }
+
+        for (j = 0; j < assentos; j++) {
+            entropy = 0;
+
+            for (k = 0; k < ingressos; k++) {
+                if (teatro[i][j + k] == 11 || j + k >= assentos) {
+                    entropy = 999;
+                    break;
+                }
+
+                entropy += entropyLin;
+
+                if (i + 1 < fileiras && teatro[i + 1][j + k] == 11) {
+                    entropy++;
+                }
+                if (i - 1 >= 0 && teatro[i - 1][j + k] == 11) {
+                    entropy++;
+                }
+
+                if (j + k < metadeCol) {
+                    entropy += (metadeCol - ((j + k) + 1));
+                } else {
+                    entropy += ((j + k) - metadeCol);
+                }
+                if (k + 1 == ingressos && (j + k) + 1 < assentos && teatro[i][(j + k) + 1] == 11) {
+                    entropy += 2;
+                }
+                if (k == 0 && (j + k) - 1 >= 0 && teatro[i][(j + k) - 1] == 11) {
+                    entropy += 2;
+                }
+            }
+
+            if (entropy < minEnt) {
+                minEnt = entropy;
+                minEsquerdo = j + 1;
+                fil = i + 1;
+            }
+        }
+    }
+
+    if (minEnt < 999) {
+        printf("\nmenorsoma: %d\n\n", minEnt);
+        printf("Fileira: %d\n\n", fil);
+        printf("Assentos: %d..%d\n\n", minEsquerdo, minEsquerdo + (ingressos - 1));
+    } else {
+        printf("\nNão existem recomendações\n\n");
+    }
 
     system("pause");
     return 0;
