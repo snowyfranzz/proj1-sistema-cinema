@@ -22,14 +22,14 @@ int main() {
     int incomodo, incomodoFileiras, menosIncomodo = 999, i, j, k, ingressos, minEsquerdo = 0, fil = 0;
     setlocale(LC_ALL, "portuguese");
 
-    ingressos = 4;
+    ingressos = 1;
     printf("Ingressos: %d\n\n", ingressos);
 
     for (i = 0; i < fileiras; i++) {
         for (j = 0; j < assentos; j++) {
             printf("%2d ", teatro[i][j]);
         }
-        printf("\n");
+        printf("\n\n");
     }
 
     for (i = 0; i < fileiras; i++) {
@@ -81,10 +81,10 @@ int main() {
     }
 
     if (menosIncomodo < 999) {
-        printf("\nFileira: %d\n", fil);
+        printf("Fileira: %d\n", fil);
         printf("Assentos: %d..%d\n", minEsquerdo, minEsquerdo + (ingressos - 1));
     } else {
-        printf("\nNão existem recomendações\n");
+        printf("Não existem recomendações\n");
     }
 
     return 0;
