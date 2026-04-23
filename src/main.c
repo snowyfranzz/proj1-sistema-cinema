@@ -36,7 +36,7 @@ int main() {
             incomodoFileiras = 0;
 
             if (i < metadeLin) {
-                incomodoFileiras += (incomodoFileiras - (i + 1));
+                incomodoFileiras += (metadeLin - (i + 1));
             } else {
                 incomodoFileiras += (i - metadeLin);
             }
