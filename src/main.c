@@ -1,5 +1,4 @@
 # include <stdio.h>
-# include <stdlib.h>
 # include <locale.h>
 
 # define fileiras 10
@@ -9,23 +8,22 @@
 
 int main() {
     int teatro[fileiras][assentos] = {
-    {0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 1, 0, 1, 0},
-    {0, 0, 1, 1, 1, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0}
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {1, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 1, 0, 1, 0, 1, 0},
+        {0, 0, 1, 1, 1, 1, 0, 0},
+        {0, 0, 0, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0}
     };
-
     int entropy, entropyLin, minEnt = 999, i, j, k, ingressos, minEsquerdo = 0, fil = 0;
     setlocale(LC_ALL, "portuguese");
 
     ingressos = 4;
-    printf("\nIngressos: %d\n\n", ingressos);
+    printf("Ingressos: %d\n\n", ingressos);
 
     for (i = 0; i < fileiras; i++) {
         for (j = 0; j < assentos; j++) {
@@ -54,17 +52,17 @@ int main() {
 
                 entropy += entropyLin;
 
+                if (j + k < metadeCol) {
+                    entropy += (metadeCol - ((j + k) + 1));
+                } else {
+                    entropy += ((j + k) - metadeCol);
+                }
+
                 if (i + 1 < fileiras && teatro[i + 1][j + k] == 1) {
                     entropy++;
                 }
                 if (i - 1 >= 0 && teatro[i - 1][j + k] == 1) {
                     entropy++;
-                }
-
-                if (j + k < metadeCol) {
-                    entropy += (metadeCol - ((j + k) + 1));
-                } else {
-                    entropy += ((j + k) - metadeCol);
                 }
                 if (k + 1 == ingressos && (j + k) + 1 < assentos && teatro[i][(j + k) + 1] == 1) {
                     entropy += 2;
@@ -76,8 +74,8 @@ int main() {
 
             if (entropy < minEnt) {
                 minEnt = entropy;
-                minEsquerdo = j + 1;
                 fil = i + 1;
+                minEsquerdo = j + 1;
             }
         }
     }
