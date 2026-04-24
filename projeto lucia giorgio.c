@@ -5,8 +5,13 @@
 #define fileiras 10
 #define assentos 8
 
+void limpaBuffer() {
+    int c;
+    while(c = getchar() != '\n' && c != EOF);
+}
+
 int main() {
-    int teatro[fileiras][assentos] = {0}, i, j, continuar = 1, ocupados, c;
+    int teatro[fileiras][assentos] = {0}, i, j, continuar = 1, ocupados;
     float porc;
 
     setlocale(LC_ALL, "portuguese");
@@ -38,13 +43,13 @@ int main() {
         if (!scanf("%d",&i)) {
             i = 0;
         }
-        while(c = getchar() != '\n' && c != EOF);
+        limpaBuffer();
 
         printf("\nColuna: ");
         if (!scanf("%d",&j)) {
             j = 0;
         }
-        while(c = getchar() != '\n' && c != EOF);
+        limpaBuffer();
 
         if (i > 0 && i <= fileiras && j > 0 && j <= assentos) {
             i--;
@@ -54,7 +59,7 @@ int main() {
             system ("cls");
             printf("Inválido\n\nContinuar?: ");
             scanf("%d", &continuar);
-            while(c = getchar() != '\n' && c != EOF);
+            limpaBuffer();
         }
 
         system ("cls");
