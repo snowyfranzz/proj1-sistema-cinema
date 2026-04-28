@@ -1,7 +1,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <locale.h>
-# include <time.h>
 
 # define FILEIRAS 10
 # define ASSENTOS 8
@@ -14,8 +13,8 @@ int main() {
     int fileiraTemp = 0, assentoTemp = 0;
     int totalIngressos = 0;
     int assentosDisponiveis = 80, somaFileira = 0;
-    int i, j, matAssentos[FILEIRAS][ASSENTOS] = {0}; // matAssentos = {0} garante ja que todos os numeros dentro dela ser√£o 0. isso so serve para o numero 0!! 
-    setlocale(LC_ALL, "portuguese");
+    int i, j, matAssentos[FILEIRAS][ASSENTOS] = {0}; // matAssentos = {0} garante ja que todos os numeros dentro dela ser„o 0. isso so serve para o numero 0!!
+    setlocale(LC_ALL, "Portuguese");
 
     for(i = 0; i<FILEIRAS; i++){
         for(j = 0; j < ASSENTOS; j++){
@@ -29,14 +28,14 @@ int main() {
     do{
         assentosDisponiveis -= totalIngressos;
         desligado = 0, input = 0, cancelado = 0, nIngMeia = 0, nIngInteira = 0, totalIngressos = 0, fileiraTemp = 0, assentoTemp = 0;
-        // =========== PRIMEIRA TELA ===========
+        // PRIMEIRA TELA
         do{
             printf("+------------------------------------------------------------------------------+\n");
             printf("|                            Bem vindo! | Cinemas CineC                        |\n");
             printf("+------------------------------------------------------------------------------+\n");
-            printf("|                            Pr√≥xima Sess√£o: Em 1h                             |\n");
+            printf("|                            PrÛxima Sess„o: Em 1h                             |\n");
             printf("|                                 Filme: Avatar                                |\n");
-            printf("|                           Assentos Dispon√≠veis: %i                           |\n", assentosDisponiveis);
+            printf("|                           Assentos DisponÌveis: %i                           |\n", assentosDisponiveis);
             printf("+------------------------------------------------------------+-----------------+\n");
             printf("|                         Ingressos:                         |    Carrinho:    |\n");
             printf("|============================================================|=================|\n");
@@ -46,7 +45,7 @@ int main() {
             printf("|       Meia Entrada..........................R$  9,50       |Total:           |\n");
             printf("|                                                            |- %02i Ingressos   |\n", nIngInteira + nIngMeia);
             printf("|                                                            |- R$%06.2f       |\n", (nIngInteira*19 + nIngMeia*9.5));
-            printf("|*  O cliente pode comprar no m√°ximo 10 ingressos de uma vez.|                 |\n");
+            printf("|*  O cliente pode comprar no m·ximo 10 ingressos de uma vez.|                 |\n");
             printf("|                                                            |                 |\n");
             printf("+------------------------------------------------------------+-----------------+\n");
             printf("|          Para continuar com sua compra, utilize os comandos abaixo!          |\n");
@@ -56,7 +55,7 @@ int main() {
             printf("|                3. Adicionar um ingresso (Meia) ao carrinho.                  |\n");
             printf("|                4. Prosseguir para a escolha de assento.                      |\n");
             printf("+------------------------------------------------------------------------------+\n");
-            scanf("%i", &input);
+            scanf("%d", &input);
 
             switch(input){
                 case 1:
@@ -64,35 +63,35 @@ int main() {
                     system("cls");
                     return 0;
                     break;
-            
+
                 case 2:
                     if(nIngMeia+nIngInteira<10){
                     nIngInteira++;
                     }
                     else{
                         system("cls");
-                        printf("Voc√™ pode comprar somente 10 ingressos de uma vez!\n");
+                        printf("VocÍ pode comprar somente 10 ingressos de uma vez!\n");
                         system("pause");
                     }
                     break;
-                
+
                 case 3:
                     if(nIngMeia+nIngInteira<10){
                     nIngMeia++;
                     }
                     else{
                         system("cls");
-                        printf("Voc√™ pode comprar somente 10 ingressos de uma vez!\n");
+                        printf("VocÍ pode comprar somente 10 ingressos de uma vez!\n");
                         system("pause");
                     }
                     break;
-                
+
                 case 4:
                     break;
 
                 default:
                     system("cls");
-                    printf("Isso n√£o √© um comando v√°lido!\n");
+                    printf("Isso n„o È um comando v·lido!\n");
                     system("pause");
             }
             system("cls");
@@ -106,17 +105,17 @@ int main() {
             printf("+------------------------------------------------------------------------------+\n");
             printf("|                            Bem vindo! | Cinemas CineC                        |\n");
             printf("+-----------------------+---------------------+--------------------------------+\n");
-            printf("| Assentos Dispon√≠veis: |      Sugest√£o:      |       Resumo da Compra:        |\n");
+            printf("| Assentos DisponÌveis: |      Sugest„o:      |       Resumo da Compra:        |\n");
             printf("|=======================|=====================|================================|\n");
             printf("|     1 2 3 4 5 6 7 8   |Para 2 ingressos, os |                                |\n");
             printf("|                       |  melhores lugares   |%02ix Ingresso (Inteira).R$%06.2f |\n", nIngInteira, (float)nIngInteira*19);
-            printf("| 01  %d %d %d %d %d %d %d %d   | ser√£o os assentos:  |                                |\n", matAssentos[0][0], matAssentos[0][1], matAssentos[0][2], matAssentos[0][3], matAssentos[0][4], matAssentos[0][5], matAssentos[0][6], matAssentos[0][7]);
+            printf("| 01  %d %d %d %d %d %d %d %d   | ser„o os assentos:  |                                |\n", matAssentos[0][0], matAssentos[0][1], matAssentos[0][2], matAssentos[0][3], matAssentos[0][4], matAssentos[0][5], matAssentos[0][6], matAssentos[0][7]);
             printf("| 02  %d %d %d %d %d %d %d %d   |* 05-4               |%02ix Ingresso (Meia)....R$%06.2f |\n", matAssentos[1][0], matAssentos[1][1], matAssentos[1][2], matAssentos[1][3], matAssentos[1][4], matAssentos[1][5], matAssentos[1][6], matAssentos[1][7], nIngMeia, nIngMeia*9.5);
             printf("| 03  %d %d %d %d %d %d %d %d   |* 05-5               |                                |\n", matAssentos[2][0], matAssentos[2][1], matAssentos[2][2], matAssentos[2][3], matAssentos[2][4], matAssentos[2][5], matAssentos[2][6], matAssentos[2][7]);
             printf("| 04  %d %d %d %d %d %d %d %d * |                     |================================|\n", matAssentos[3][0], matAssentos[3][1], matAssentos[3][2], matAssentos[3][3], matAssentos[3][4], matAssentos[3][5], matAssentos[3][6], matAssentos[3][7]);
             printf("| 05  %d %d %d %d %d %d %d %d   |                     |                                |\n", matAssentos[4][0], matAssentos[4][1], matAssentos[4][2], matAssentos[4][3], matAssentos[4][4], matAssentos[4][5], matAssentos[4][6], matAssentos[4][7]);
             printf("| 06  %d %d %d %d %d %d %d %d   +---------------------+Total:.................R$%06.2f |\n", matAssentos[5][0], matAssentos[5][1], matAssentos[5][2], matAssentos[5][3], matAssentos[5][4], matAssentos[5][5], matAssentos[5][6], matAssentos[5][7], (nIngInteira*19 + nIngMeia*9.5));
-            printf("| 07  %d %d %d %d %d %d %d %d   |0: Assento Dispon√≠vel|                                |\n", matAssentos[6][0], matAssentos[6][1], matAssentos[6][2], matAssentos[6][3], matAssentos[6][4], matAssentos[6][5], matAssentos[6][6], matAssentos[6][7]);
+            printf("| 07  %d %d %d %d %d %d %d %d   |0: Assento DisponÌvel|                                |\n", matAssentos[6][0], matAssentos[6][1], matAssentos[6][2], matAssentos[6][3], matAssentos[6][4], matAssentos[6][5], matAssentos[6][6], matAssentos[6][7]);
             printf("| 08  %d %d %d %d %d %d %d %d ! |1: Assento Ocupado   |                                |\n", matAssentos[7][0], matAssentos[7][1], matAssentos[7][2], matAssentos[7][3], matAssentos[7][4], matAssentos[7][5], matAssentos[7][6], matAssentos[7][7]);
             printf("| 09  %d %d %d %d %d %d %d %d   |!: Fileira Mais Cheia|                                |\n", matAssentos[8][0], matAssentos[8][1], matAssentos[8][2], matAssentos[8][3], matAssentos[8][4], matAssentos[8][5], matAssentos[8][6], matAssentos[8][7]);
             printf("| 10  %d %d %d %d %d %d %d %d   |*: Fileira Mais Vazia|                                |\n", matAssentos[9][0], matAssentos[9][1], matAssentos[9][2], matAssentos[9][3], matAssentos[9][4], matAssentos[9][5], matAssentos[9][6], matAssentos[9][7]);
@@ -128,13 +127,13 @@ int main() {
             printf("|                   2. Prosseguir para a escolha do assento.                   |\n");
             printf("|                                                                              |\n");
             printf("+------------------------------------------------------------------------------+\n");
-            scanf("%i", &input);
+            scanf("%d", &input);
 
             switch(input){
                 case 1:
                     system("cls");
-                    printf("Tem certeza que quer cancelar sua compra? (1. Sim | 2. N√£o) > ");
-                    scanf("%i", &input);
+                    printf("Tem certeza que quer cancelar sua compra? (1. Sim | 2. N„o) > ");
+                    scanf("%d", &input);
                     if(input == 2){
                        input = 1;
                         system("cls");
@@ -146,17 +145,17 @@ int main() {
                 case 2:
                     for(i = 0; i < totalIngressos; i++){
                         printf("Insira a fileira do assento (Ingresso #%i) > ", i + 1);
-                        scanf("%i", &fileiraTemp);
+                        scanf("%d", &fileiraTemp);
                         fileiraTemp--;
 
-                        printf("Insira o n√∫mero do assento (Ingresso #%i) > ", i + 1);
-                        scanf("%i", &assentoTemp);
+                        printf("Insira o n˙mero do assento (Ingresso #%i) > ", i + 1);
+                        scanf("%d", &assentoTemp);
                         assentoTemp--;
 
                         if(matAssentos[fileiraTemp][assentoTemp] == 0 && fileiraTemp <= 10 && assentoTemp <= 8){
                             matAssentos[fileiraTemp][assentoTemp] = 1;
                         } else {
-                            printf("N√£o foi poss√≠vel selecionar esse assento!\n");
+                            printf("N„o foi possÌvel selecionar esse assento!\n");
                             i--;
                             system("pause");
                         }
@@ -164,11 +163,11 @@ int main() {
                     system("pause");
                     system("cls");
                     break;
-                
+
                 default:
                     system("cls");
-                    printf("Isso n√£o √© um comando v√°lido!\n");
-                    system("pause");     
+                    printf("Isso n„o È um comando v·lido!\n");
+                    system("pause");
 
                     break;
             }
@@ -201,13 +200,13 @@ int main() {
                 printf("|                            2. Verificar pagamento.                           |\n");
                 printf("|                                                                              |\n");
                 printf("+------------------------------------------------------------------------------+\n");
-                scanf("%i", &input);
+                scanf("%d", &input);
 
                 switch(input){
                     case 1:
                         system("cls");
-                        printf("Tem certeza que quer cancelar sua compra? (1. Sim | 2. N√£o) > ");
-                        scanf("%i", &input);
+                        printf("Tem certeza que quer cancelar sua compra? (1. Sim | 2. N„o) > ");
+                        scanf("%d", &input);
                         if(input == 2){
                             input = 1;
                             system("cls");
@@ -218,11 +217,11 @@ int main() {
 
                     case 2:
                         break;
-                    
+
                     default:
                         system("cls");
-                        printf("Isso n√£o √© um comando v√°lido!\n");
-                        system("pause");   
+                        printf("Isso n„o È um comando v·lido!\n");
+                        system("pause");
                 }
             }while (input != 2 || cancelado == 1);
         }
