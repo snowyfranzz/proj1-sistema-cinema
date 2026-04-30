@@ -39,8 +39,8 @@ int main() {
     }
 
     do {
-        input = 0, desligado = 0, cancelado = 0, nIngMeia = 0, nIngInteira = 0, ingressos[0] = 0, ingressos[1] = 0, fileiraTemp = 0, assentoTemp = 0;
         assentosDisponiveis -= ingressos[0];
+        input = 0, desligado = 0, cancelado = 0, nIngMeia = 0, nIngInteira = 0, ingressos[0] = 0, ingressos[1] = 0, fileiraTemp = 0, assentoTemp = 0;
 
         // PRIMEIRA TELA
         do {
@@ -83,7 +83,7 @@ int main() {
 
                 case 2:
                 case 3:
-                    if(ingressos[0] < 16){
+                    if(ingressos[0] < ASSENTOS * 2){
                         if(input == 2) {
                             nIngInteira++;
                         } else {
@@ -91,7 +91,7 @@ int main() {
                         }
                     } else {
                         system("cls");
-                        printf("Você pode comprar somente 16 ingressos de uma vez!\n");
+                        printf("Você pode comprar somente %2d ingressos de uma vez!\n",ASSENTOS * 2);
                         system("pause");
                     }
                     break;
@@ -155,7 +155,7 @@ int main() {
 
                             jk = j + k;
 
-                            if (cinema[i][jk] == 1 || jk >= ASSENTOS || (i + 1 == recomendFil[0] && jk + 1 >= recomendEsquerdo[0] && jk + 1 <= recomendDireito[0])) {
+                            if (cinema[i][jk] == 1 || jk >= ASSENTOS || (grupo > 0 && i + 1 == recomendFil[0] && jk + 1 >= recomendEsquerdo[0] && jk + 1 <= recomendDireito[0])) {
                                 incomodo = 999;
                                 break;
                             }
