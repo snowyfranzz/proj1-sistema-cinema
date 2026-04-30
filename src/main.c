@@ -39,7 +39,9 @@ int main() {
     }
 
     do {
-        assentosDisponiveis -= ingressos[0];
+        if (cancelado != 1) {
+            assentosDisponiveis -= ingressos[0];
+        }
         input = 0, desligado = 0, cancelado = 0, nIngMeia = 0, nIngInteira = 0, ingressos[0] = 0, ingressos[1] = 0, fileiraTemp = 0, assentoTemp = 0;
 
         // PRIMEIRA TELA
@@ -201,6 +203,10 @@ int main() {
                     recomendEsquerdo[grupo] = minEsquerdo;
                     recomendDireito[grupo] = minEsquerdo + (ingressos[grupo] - 1);
                     recomendFil[grupo] = fil;
+                } else {
+                    recomendEsquerdo[grupo] = minEsquerdo;
+                    recomendDireito[grupo] = minEsquerdo + (ingressos[grupo] - 1);
+                    recomendFil[grupo] = fil;
                 }
             }
             ingressos[0] += ingressos[1];
@@ -298,7 +304,7 @@ int main() {
                             }
                             break;
                         case 3:
-                            if (dividir == 1) {
+                            if (menosIncomodo < 999) {
                                 if (recomendEsquerdo[1] != recomendDireito[1]) {
                                     printf(" | * %02d     * %02d ao %02d |================================|\n",recomendFil[1], recomendEsquerdo[1], recomendDireito[1]);
                                 } else {
