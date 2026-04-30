@@ -25,7 +25,7 @@ int main() {
 
     setlocale(LC_ALL, "Portuguese");
 
-    if (FILEIRAS < 10 || ASSENTOS < 1) {
+    if (FILEIRAS < 10 || FILEIRAS > 31 || ASSENTOS < 1 || ASSENTOS > 31) {
         printf("\n\nNUMERO DE FILEIRAS OU ASSENTOS INVÁLIDO\n\n");
         return 1;
     }
