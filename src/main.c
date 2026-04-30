@@ -14,7 +14,7 @@ void LimpaBuffer() {
 
 int main() {
     int cinema[FILEIRAS][ASSENTOS] = {0}, fileiraTemp, assentoTemp, i, j, k, jk;
-    int incomodo, incomodoFileiras, menosIncomodo, minEsquerdo = 0, fil = 0, recomendEsquerdo[2], recomendDireito[2], truefil;
+    int incomodo, incomodoFileiras, menosIncomodo, minEsquerdo = 0, fil = 0, recomendEsquerdo[2], recomendDireito[2], recomendFil[2];
 
     int input, desligado, cancelado;
 
@@ -25,7 +25,7 @@ int main() {
     setlocale(LC_ALL, "Portuguese");
 
     if (FILEIRAS < 10) {
-        printf("\n\nNUMERO DE FILEIRAS INVÔøΩLIDO\n\n");
+        printf("\n\nNUMERO DE FILEIRAS INV¡LIDO\n\n");
         return 1;
     }
 
@@ -48,9 +48,9 @@ int main() {
             printf("+------------------------------------------------------------------------------+\n");
             printf("|                            Bem vindo! | Cinemas CineC                        |\n");
             printf("+------------------------------------------------------------------------------+\n");
-            printf("|                            Pr√≥xima Sess√£o: Em 1h                             |\n");
+            printf("|                            PrÛxima Sess„o: Em 1h                             |\n");
             printf("|                                 Filme: Avatar                                |\n");
-            printf("|                           Assentos DisponÔøΩveis: %3i                          |\n", assentosDisponiveis);
+            printf("|                           Assentos DisponÌveis: %3i                          |\n", assentosDisponiveis);
             printf("+------------------------------------------------------------+-----------------+\n");
             printf("|                         Ingressos:                         |    Carrinho:    |\n");
             printf("|============================================================|=================|\n");
@@ -60,7 +60,7 @@ int main() {
             printf("|       Meia Entrada..........................R$ %5.2f       |Total:           |\n",valorMedia);
             printf("|                                                            |- %02i Ingressos   |\n", ingressos[0]);
             printf("|                                                            |- R$%6.2f       |\n", (nIngInteira*valorInteira + nIngMeia*valorMedia));
-            printf("|*  O cliente pode comprar no mÔøΩximo 16 ingressos de uma vez.|                 |\n");
+            printf("|*  O cliente pode comprar no m·ximo 16 ingressos de uma vez.|                 |\n");
             printf("|                                                            |                 |\n");
             printf("+------------------------------------------------------------+-----------------+\n");
             printf("|          Para continuar com sua compra, utilize os comandos abaixo!          |\n");
@@ -90,7 +90,7 @@ int main() {
                         }
                     } else {
                         system("cls");
-                        printf("Voc√™ pode comprar somente 16 ingressos de uma vez!\n");
+                        printf("VocÍ pode comprar somente 16 ingressos de uma vez!\n");
                         system("pause");
                     }
                     break;
@@ -98,7 +98,7 @@ int main() {
                 case 4:
                     if (ingressos[0] > 1) {
                         system("cls");
-                        printf("Deseja dividir os ingressantes? (1. Sim | 2. NÔøΩo) > ");
+                        printf("Deseja dividir os ingressantes? (1. Sim | 2. N„o) > ");
                         scanf("%d",&dividir);
                         LimpaBuffer();
                     }
@@ -106,7 +106,7 @@ int main() {
 
                 default:
                     system("cls");
-                    printf("Comando Inv√°lido!\n");
+                    printf("Comando Inv·lido!\n");
                     system("pause");
             }
         } while(input != 4 && desligado != 1);
@@ -133,10 +133,10 @@ int main() {
                         incomodoFileiras = 0;
 
                         if (i < METADELIN) {
-                            incomodoFileiras += (METADELIN - i);
-
-                            if (FILEIRAS % 2 != 0) {
-                                incomodoFileiras++;
+                            if (FILEIRAS % 2 == 0) {
+                                incomodoFileiras += (METADELIN - (i + 1));
+                            } else {
+                                incomodoFileiras += (METADELIN - i);
                             }
                         } else {
                             incomodoFileiras += (i - METADELIN);
@@ -150,7 +150,7 @@ int main() {
 
                             jk = j + k;
 
-                            if (cinema[i][jk] == 1 || jk >= ASSENTOS || (i + 1 == truefil && jk + 1 >= recomendEsquerdo[grupo] && jk + 1 <= recomendDireito[grupo])) {
+                            if (cinema[i][jk] == 1 || jk >= ASSENTOS || (i + 1 == recomendFil[0] && jk + 1 >= recomendEsquerdo[0] && jk + 1 <= recomendDireito[0])) {
                                 incomodo = 999;
                                 break;
                             }
@@ -159,10 +159,11 @@ int main() {
 
                             if (jk < METADECOL) {
 
-                                incomodo += (METADECOL - jk);
 
-                                if (ASSENTOS % 2 != 0) {
-                                    incomodo++;
+                                if (ASSENTOS % 2 == 0) {
+                                    incomodo += (METADECOL - (jk + 1));
+                                } else {
+                                    incomodo += (METADECOL - jk);
                                 }
 
                             } else {
@@ -191,21 +192,10 @@ int main() {
                     }
                 }
 
-                printf("\nGrupo %d\n", grupo + 1);
-
                 if (menosIncomodo < 999) {
                     recomendEsquerdo[grupo] = minEsquerdo;
                     recomendDireito[grupo] = minEsquerdo + (ingressos[grupo] - 1);
-                    truefil = fil;
-
-                    printf("Fileira: %d\n", fil);
-                    if (ingressos[0] == 1) {
-                        printf("Assento: %d\n", recomendEsquerdo[grupo]);
-                    } else {
-                        printf("Assentos: %d ao %d\n", recomendEsquerdo[grupo], recomendDireito[grupo]);
-                    }
-                } else {
-                    printf("NÔøΩo existem recomendaÔøΩÔøΩes\n\n");
+                    recomendFil[grupo] = fil;
                 }
             }
             ingressos[0] += ingressos[1];
@@ -243,7 +233,7 @@ int main() {
                 for (i = 0; i < (METADECOL + ASSENTOS % 2); i++) {
                     printf("  ");
                 }
-                printf("|      SugestÔøΩes:     |       Resumo da Compra:        |\n");
+                printf("|      Sugestıes:     |       Resumo da Compra:        |\n");
 
                 printf("|=======");
                 for (i = 0; i < ASSENTOS; i++) {
@@ -272,7 +262,7 @@ int main() {
                         printf("%d ", cinema[i][j]);
                         if (j + 1 == ASSENTOS) {
 
-                            //Substituir pela lÔøΩgica de fileira cheia/ocupada
+                            //Substituir pela lÛgica de fileira cheia/ocupada
                             if (i == 3) {
                                 printf("*");
                             } else {
@@ -292,10 +282,26 @@ int main() {
                             printf(" |---------------------|%2ix Ingresso (Meia)....R$%6.2f |\n", nIngMeia, nIngMeia*valorMedia);
                             break;
                         case 2:
-                            printf(" | * 05      * 4 ao 5  |                                |\n");
+                            if (recomendEsquerdo[0] != 0) {
+                                if (recomendEsquerdo[0] != recomendDireito[0]) {
+                                    printf(" | * %02d     * %02d ao %02d |                                |\n",recomendFil[0], recomendEsquerdo[0], recomendDireito[0]);
+                                } else {
+                                    printf(" | * %02d     * %02d       |                                |\n",recomendFil[0], recomendEsquerdo[0]);
+                                }
+                            } else {
+                                printf(" |  * Nada   * Nada    |                                |\n");
+                            }
                             break;
                         case 3:
-                            printf(" | * 05      * 6 ao 7  |================================|\n");
+                            if (dividir == 1) {
+                                if (recomendEsquerdo[1] != recomendDireito[1]) {
+                                    printf(" | * %02d     * %02d ao %02d |================================|\n",recomendFil[1], recomendEsquerdo[1], recomendDireito[1]);
+                                } else {
+                                    printf(" | * %02d     * %02d       |================================|\n",recomendFil[1], recomendEsquerdo[1]);
+                                }
+                            } else {
+                                printf(" |                     |================================|\n");
+                            }
                             break;
                         case 4:
                             printf(" |                     |                                |\n");
@@ -304,7 +310,7 @@ int main() {
                             printf(" +---------------------+ Total:................R$%6.2f |\n", (nIngInteira*valorInteira + nIngMeia*valorMedia));
                             break;
                         case 6:
-                            printf(" |0: Assento DisponÔøΩvel|                                |\n");
+                            printf(" |0: Assento DisponÌvel|                                |\n");
                             break;
                         case 7:
                             printf(" |1: Assento Ocupado   |                                |\n");
@@ -388,7 +394,7 @@ int main() {
                 switch(input){
                     case 1:
                         system("cls");
-                        printf("Tem certeza que quer cancelar sua compra? (1. Sim | 2. N√£o) > ");
+                        printf("Tem certeza que quer cancelar sua compra? (1. Sim | 2. N„o) > ");
 
                         scanf("%d", &input);
                         LimpaBuffer();
@@ -412,7 +418,7 @@ int main() {
                             LimpaBuffer();
                             fileiraTemp--;
 
-                            printf("Insira o n√∫mero do assento (Ingresso #%i) > ", i + 1);
+                            printf("Insira o n˙mero do assento (Ingresso #%i) > ", i + 1);
                             if (!scanf("%d", &assentoTemp)) {
                                 assentoTemp = 0;
                             }
@@ -422,7 +428,7 @@ int main() {
                             if(cinema[fileiraTemp][assentoTemp] == 0 && fileiraTemp >= 0 && fileiraTemp < FILEIRAS && assentoTemp >= 0 && assentoTemp < ASSENTOS){
                                 cinema[fileiraTemp][assentoTemp] = 1;
                             } else {
-                                printf("N√£o foi poss√≠vel selecionar esse assento!\n");
+                                printf("N„o foi possÌvel selecionar esse assento!\n");
                                 i--;
                                 system("pause");
                             }
@@ -432,7 +438,7 @@ int main() {
 
                     default:
                         system("cls");
-                        printf("Comando Inv√°lido!\n");
+                        printf("Comando Inv·lido!\n");
                         system("pause");
 
                         break;
@@ -473,7 +479,7 @@ int main() {
                     switch(input){
                         case 1:
                             system("cls");
-                            printf("Tem certeza que quer cancelar sua compra? (1. Sim | 2. N√£o) > ");
+                            printf("Tem certeza que quer cancelar sua compra? (1. Sim | 2. N„o) > ");
                             scanf("%d", &input);
                             LimpaBuffer();
                             if(input == 2){
@@ -488,7 +494,7 @@ int main() {
 
                         default:
                             system("cls");
-                            printf("Comando Inv√°lido!\n");
+                            printf("Comando Inv·lido!\n");
                             system("pause");
                     }
                 } while (input != 2 && cancelado != 1);
