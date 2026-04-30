@@ -1,61 +1,30 @@
 - Tela 1.1: Escolha da quantidade de ingressos
 ```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│       Bem vindo! | 15:33 | Sábado, 11 de Abril de 2025 | Cinemas CineC       │
-├──────────────────────────────────────────────────────────────────────────────┤
-│                            Próxima Sessão: 16:20                             │
-│                                 Filme: Avatar                                │
-│                           Assentos Disponíveis: 56                           │
-├────────────────────────────────────────────────────────────┬─────────────────┤
-│                         Ingressos:                         │    Carrinho:    │
-│════════════════════════════════════════════════════════════│═════════════════│
-│                                                            │0x..Inteira      │
-│       Meia Entrada..........................R$  9,00       │0x..Meia-Entrada │
-│                                                            │                 │
-│       Inteira...............................R$ 18,00       │Total:           │
-│                                                            │- 0 Ingressos    │
-│                                                            │- R$0,00         │
-│*  O cliente pode comprar no máximo 20 ingressos de uma vez.│                 │
-│                                                            │                 │
-├────────────────────────────────────────────────────────────┴─────────────────┤
-│          Para continuar com sua compra, utilize os comandos abaixo!          │
-│══════════════════════════════════════════════════════════════════════════════│
-│                1. Sair do programa (Desligar)                                │
-│                2. Adicionar um Ingresso (Inteira) ao carrinho.               │
-│                3. Adicionar um ingresso (Meia) ao carrinho.                  │
-│                4. Prosseguir para a escolha de assento.                      │
-└──────────────────────────────────────────────────────────────────────────────┘
-```
-
-- Tela 1.1: Atualizada com valores exemplares
-```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│       Bem vindo! | 15:33 | Sábado, 11 de Abril de 2025 | Cinemas CineC       │
-├──────────────────────────────────────────────────────────────────────────────┤
-│                            Próxima Sessão: 16:20                             │
-│                                 Filme: Avatar                                │
-│                           Assentos Disponíveis: 56                           │
-├────────────────────────────────────────────────────────────┬─────────────────┤
-│                         Ingressos:                         │    Carrinho:    │
-│════════════════════════════════════════════════════════════│═════════════════│
-│                                                            │1x..Inteira      │
-│       Meia Entrada..........................R$  9,00       │1x..Meia-Entrada │
-│                                                            │                 │
-│       Inteira...............................R$ 18,00       │Total:           │
-│                                                            │- 2 Ingressos    │
-│                                                            │- R$27,00        │
-│*  O cliente pode comprar no máximo 20 ingressos de uma vez.│                 │
-│                                                            │                 │
-├────────────────────────────────────────────────────────────┴─────────────────┤
-│          Para continuar com sua compra, utilize os comandos abaixo!          │
-│══════════════════════════════════════════════════════════════════════════════│
-│                1. Sair do programa (Desligar)                                │
-│                2. Adicionar um Ingresso (Inteira) ao carrinho.               │
-│                3. Adicionar um ingresso (Meia) ao carrinho.                  │
-│                4. Prosseguir para a escolha de assento.                      │
-└──────────────────────────────────────────────────────────────────────────────┘
-```
-
++------------------------------------------------------------------------------+
+|                            Bem vindo! | Cinemas CineC                        |
++------------------------------------------------------------------------------+
+|                         Percentual de Ocupação:   1%                         |
+|                            Assentos Ocupados:   0                            |
+|                           Assentos Disponíveis:  80                          |
++------------------------------------------------------------+-----------------+
+|                         Ingressos:                         |    Carrinho:    |
+|============================================================|=================|
+|                                                            | 0x..Inteira     |
+|       Inteira...............................R$ 19.00       | 0x..Meia-Entrada|
+|                                                            |                 |
+|       Meia Entrada..........................R$  9.50       |Total:           |
+|                                                            |- 00 Ingressos   |
+|                                                            |- R$  0.00       |
+|*  O cliente pode comprar no máximo 16 ingressos de uma vez.|                 |
+|                                                            |                 |
++------------------------------------------------------------+-----------------+
+|          Para continuar com sua compra, utilize os comandos abaixo!          |
+|==============================================================================|
+|                1. Sair do programa (Desligar)                                |
+|                2. Adicionar um Ingresso (Inteira) ao carrinho.               |
+|                3. Adicionar um ingresso (Meia) ao carrinho.                  |
+|                4. Prosseguir para a escolha de assento.                      |
++------------------------------------------------------------------------------+
 
 - Tela 2: Escolha dos lugares
 ```
@@ -127,8 +96,8 @@ Os assentos escolhidos foram: 05-4, 05-5. Isso está correto? (0. Não | 1. Sim)
 
 - Tela 4: Fim
 ```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│       Bem vindo! | 15:33 | Sábado, 11 de Abril de 2025 | Cinemas CineC       │
++------------------------------------------------------------------------------+
+│                          Bem vindo! | Cinemas CineC                          │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │                                                                              │
