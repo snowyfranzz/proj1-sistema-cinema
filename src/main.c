@@ -22,10 +22,11 @@ int main() {
     float valorMedia = 9.5, valorInteira = 19.0;
 
     int assentosDisponiveis = (FILEIRAS * ASSENTOS), somaAssentos = 0;
+
     setlocale(LC_ALL, "Portuguese");
 
-    if (FILEIRAS < 10) {
-        printf("\n\nNUMERO DE FILEIRAS INVÁLIDO\n\n");
+    if (FILEIRAS < 10 || ASSENTOS < 1) {
+        printf("\n\nNUMERO DE FILEIRAS OU ASSENTOS INVÁLIDO\n\n");
         return 1;
     }
 
@@ -113,6 +114,10 @@ int main() {
 
         // SEGUNDA TELA
         if (desligado != 1) {
+            recomendEsquerdo[0] = 0;
+            recomendEsquerdo[1] = 0;
+            recomendDireito[0] = 0;
+            recomendDireito[1] = 0;
 
             if (dividir == 1) {
                 ingressos[1] = ingressos[0] % 2;
