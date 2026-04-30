@@ -38,7 +38,7 @@ int main() {
     int ingressos[2] = {0,0}, nIngMeia, nIngInteira, dividir = 2, grupo;
     float valorMedia = 9.5, valorInteira = 19.0;
 
-    int assentosDisponiveis = (FILEIRAS * ASSENTOS), somaAssentos = 0;
+    int assentosDisponiveis = (FILEIRAS * ASSENTOS), assentosOcupados, somaAssentos = 0;
 
     int somaFileira, somaFileiraComp, somaMaisVazia, somaMaisCheia;
 
@@ -65,13 +65,16 @@ int main() {
 
         // PRIMEIRA TELA
         do {
+
+            assentosOcupados = (FILEIRAS * ASSENTOS) - assentosDisponiveis;
+
             system("cls");
             ingressos[0] = nIngInteira + nIngMeia;
             printf("+------------------------------------------------------------------------------+\n");
             printf("|                            Bem vindo! | Cinemas CineC                        |\n");
             printf("+------------------------------------------------------------------------------+\n");
-            printf("|                            Próxima Sessão: Em 1h                             |\n");
-            printf("|                                 Filme: Avatar                                |\n");
+            printf("|                        Percentual de Ocupação: %6.1f%%                       |\n", ((float)assentosOcupados/(FILEIRAS * ASSENTOS))*100);
+            printf("|                            Assentos Ocupados: %3i                            |\n", assentosOcupados);
             printf("|                           Assentos Disponíveis: %3i                          |\n", assentosDisponiveis);
             printf("+------------------------------------------------------------+-----------------+\n");
             printf("|                         Ingressos:                         |    Carrinho:    |\n");
@@ -118,11 +121,18 @@ int main() {
                     break;
 
                 case 4:
-                    if (ingressos[0] > 1) {
+                    if(nIngInteira + nIngMeia > 0){
+                        if (ingressos[0] > 1) {
+                            system("cls");
+                            printf("Deseja dividir os ingressantes? (1. Sim | 2. Não) > ");
+                            scanf("%d",&dividir);
+                            LimpaBuffer();
+                        }
+                    } else {
                         system("cls");
-                        printf("Deseja dividir os ingressantes? (1. Sim | 2. Não) > ");
-                        scanf("%d",&dividir);
-                        LimpaBuffer();
+                        printf("Insira pelo menos 1 ingresso no seu carrinho para continuar!\n");
+                        input = 0;
+                        system("pause");
                     }
                     break;
 
