@@ -30,12 +30,12 @@ void LimpaBuffer() {
 }
 
 int main() {
-    int cinema[FILEIRAS][ASSENTOS] = {0}, fileiraTemp, assentoTemp, i, j, k, jk;
+    int cinema[FILEIRAS][ASSENTOS] = {0}, fileiraTemp, assentoTemp, i, j, k, jk, grupo;
     int incomodo, incomodoFileiras, menosIncomodo, minEsquerdo = 0, fil = 0, recomendEsquerdo[2], recomendDireito[2], recomendFil[2];
 
     int input, desligado, cancelado;
 
-    int ingressos[2] = {0,0}, nIngMeia, nIngInteira, dividir, grupo;
+    int ingressos[2] = {0,0}, nIngMeia, nIngInteira, dividir;
     float valorMedia = 9.5, valorInteira = 19.0;
 
     int assentosDisponiveis = (FILEIRAS * ASSENTOS), assentosOcupados, somaAssentos = 0;
@@ -228,15 +228,9 @@ int main() {
                     }
                 }
 
-                if (menosIncomodo < 999) {
-                    recomendEsquerdo[grupo] = minEsquerdo;
-                    recomendDireito[grupo] = minEsquerdo + (ingressos[grupo] - 1);
-                    recomendFil[grupo] = fil;
-                } else {
-                    recomendEsquerdo[grupo] = minEsquerdo;
-                    recomendDireito[grupo] = minEsquerdo + (ingressos[grupo] - 1);
-                    recomendFil[grupo] = fil;
-                }
+                recomendEsquerdo[grupo] = minEsquerdo;
+                recomendDireito[grupo] = minEsquerdo + (ingressos[grupo] - 1);
+                recomendFil[grupo] = fil;
             }
             ingressos[0] += ingressos[1];
             ingressos[1] = 0;
