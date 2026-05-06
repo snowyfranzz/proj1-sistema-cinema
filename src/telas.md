@@ -25,6 +25,7 @@
 |                3. Adicionar um ingresso (Meia) ao carrinho.                  |
 |                4. Prosseguir para a escolha de assento.                      |
 +------------------------------------------------------------------------------+
+```
 
 - Tela 2: Escolha dos lugares
 ```
