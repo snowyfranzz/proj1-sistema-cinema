@@ -25,6 +25,7 @@
 |                3. Adicionar um ingresso (Meia) ao carrinho.                  |
 |                4. Prosseguir para a escolha de assento.                      |
 +------------------------------------------------------------------------------+
+```
 
 - Tela 2: Escolha dos lugares
 ```
@@ -122,4 +123,33 @@ Os assentos escolhidos foram: 05-4, 05-5. Isso está correto? (0. Não | 1. Sim)
 │                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘
 + system("pause") após a tela
+```
+
+- Nova tela 2 (Em desenvolvimento ainda)
+```
++------------------------------------------------------------------------------+
+|                            Bem vindo! | Cinemas CineC                        |
++---------------------------+--------------------------+-----------------------+
+|          Cinema:          |       Informações:       |       Sugestões:      |
+|===========================|==========================|=======================|
+|     1 2 3 4 5 6 7 8       |0: Assento Disponível     |     1 Ingresso(s):    |
+|                           |1: Assento Ocupado        +-----------+-----------+
+| 01  1 1 1 1 1 1 0 0   #02 |!: Fileiras Mais Cheias   |  Fileira  |  Assentos |    
+| 02  0 0 0 0 0 0 0 0 *     |*: Fileiras Mais Vazias   |-----------|-----------|
+| 03  0 0 0 0 0 0 0 0 *     |#xx: Fileiras Críticas e  |* 05       |* 04       |x
+| 04  0 0 0 0 0 0 0 0 *     |assentos livres na fileira|           |           |
+| 05  0 0 0 0 0 0 0 0 *     |==========================|           |           |
+| 06  0 0 0 0 0 0 0 0 *     |Ocupação: 8.11%           |           |           |
+| 07  1 1 1 1 1 0 1 1 ! #01 |Assentos Críticos: 02     |           |           |
+| 08  0 0 0 0 0 0 0 0 *     |Assentos Ocupados: 006    |           |           |
+| 09  0 0 0 0 0 0 0 0 *     |Assentos Disponíveis: 074 |           |           |
+| 10  0 0 0 0 0 0 0 0 *     |Ingressos disponíveis: 01 |           |           |
++---------------------------+--------------------------+-----------+-----------+
+|            Para escolher seu assento, utilize os comandos abaixo!            |
+|==============================================================================|
+|                                                                              |
+|                   1. Cancelar Compra.                                        |
+|                   2. Prosseguir para a escolha do assento.                   |
+|                                                                              |
++------------------------------------------------------------------------------+
 ```
