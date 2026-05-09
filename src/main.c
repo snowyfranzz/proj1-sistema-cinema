@@ -18,8 +18,8 @@ Não
 Inválido
 Sugestões
 lógica
-Disponível                                                                                               
-número                                                                                                                       
+Disponível
+número
 Não foi possível
 
 */
@@ -30,12 +30,12 @@ void LimpaBuffer() {
 }
 
 int main() {
-    int cinema[FILEIRAS][ASSENTOS] = {0}, fileiraTemp, assentoTemp, i, j, k, jk;
+    int cinema[FILEIRAS][ASSENTOS] = {0}, matrizTemp[FILEIRAS][ASSENTOS] = {0}, fileiraTemp, assentoTemp, i, j, k, jk, grupo;
     int incomodo, incomodoFileiras, menosIncomodo, minEsquerdo = 0, fil = 0, recomendEsquerdo[2], recomendDireito[2], recomendFil[2];
 
-    int input, desligado, cancelado;
+    int input, desligado, cancelado = 0, ingressosEscolhidos = 0, cancelaMeia = 0, cancelaInteira = 0, cancelaTotal = 0, ingressosTemp = 0;
 
-    int ingressos[2] = {0,0}, nIngMeia, nIngInteira, dividir = 2, grupo;
+    int ingressos[2] = {0,0}, nIngMeia, nIngInteira, dividir;
     float valorMedia = 9.5, valorInteira = 19.0;
 
     int assentosDisponiveis = (FILEIRAS * ASSENTOS), assentosOcupados, somaAssentos = 0;
@@ -61,7 +61,7 @@ int main() {
         if (cancelado != 1) {
             assentosDisponiveis -= ingressos[0];
         }
-        input = 0, desligado = 0, cancelado = 0, nIngMeia = 0, nIngInteira = 0, ingressos[0] = 0, ingressos[1] = 0, fileiraTemp = 0, assentoTemp = 0;
+        input = 0, desligado = 0, cancelado = 0, nIngMeia = 0, nIngInteira = 0, ingressos[0] = 0, ingressos[1] = 0, fileiraTemp = 0, assentoTemp = 0, dividir = 2;
 
         // PRIMEIRA TELA
         do {
@@ -121,7 +121,7 @@ int main() {
                     break;
 
                 case 4:
-                    if(nIngInteira + nIngMeia > 0){
+                    if(ingressos[0] > 0){
                         if (ingressos[0] > 1) {
                             system("cls");
                             printf("Deseja dividir os ingressantes? (1. Sim | 2. Não) > ");
@@ -228,15 +228,9 @@ int main() {
                     }
                 }
 
-                if (menosIncomodo < 999) {
-                    recomendEsquerdo[grupo] = minEsquerdo;
-                    recomendDireito[grupo] = minEsquerdo + (ingressos[grupo] - 1);
-                    recomendFil[grupo] = fil;
-                } else {
-                    recomendEsquerdo[grupo] = minEsquerdo;
-                    recomendDireito[grupo] = minEsquerdo + (ingressos[grupo] - 1);
-                    recomendFil[grupo] = fil;
-                }
+                recomendEsquerdo[grupo] = minEsquerdo;
+                recomendDireito[grupo] = minEsquerdo + (ingressos[grupo] - 1);
+                recomendFil[grupo] = fil;
             }
             ingressos[0] += ingressos[1];
             ingressos[1] = 0;
@@ -295,7 +289,7 @@ int main() {
                 for (i = 0; i < (METADECOL + ASSENTOS % 2); i++) {
                     printf("  ");
                 }
-                printf("|      Sugestões:     |       Resumo da Compra:        |\n");
+                printf("|       Informações:       |       Sugestões:      |\n");
 
                 printf("|=======");
                 for (i = 0; i < ASSENTOS; i++) {
@@ -358,7 +352,7 @@ int main() {
                             }
                             break;
                         case 3:
-                            if (menosIncomodo < 999) {
+                            if (dividir == 1 && menosIncomodo < 999) {
                                 if (recomendEsquerdo[1] != recomendDireito[1]) {
                                     printf(" | * %02d     * %02d ao %02d |================================|\n",recomendFil[1], recomendEsquerdo[1], recomendDireito[1]);
                                 } else {
@@ -435,17 +429,17 @@ int main() {
                 for (i = 0; i < METADECOL; i++) {
                     printf("  ");
                 }
-                printf("2. Prosseguir para a escolha do assento.");
+                printf("2. Escolher assentos.");
                 for (i = 0; i < (METADECOL + ASSENTOS % 2); i++) {
                     printf("  ");
                 }
                 printf("           |\n");
 
-                printf("|");
-                for (i = 0; i < ASSENTOS; i++) {
+               printf("3. Cancelar ingressos.");
+                for (i = 0; i < (METADECOL + ASSENTOS % 2); i++) {
                     printf("  ");
                 }
-                printf("                                                              |\n");
+                printf("           |\n");
 
                 printf("+");
                 for (i = 0; i < ASSENTOS; i++) {
@@ -474,33 +468,209 @@ int main() {
                         break;
 
                     case 2:
-                        for(i = 0; i < ingressos[0]; i++){
 
-                            printf("Insira a fileira do assento (Ingresso #%i) > ", i + 1);
-                            if (!scanf("%d", &fileiraTemp)) {
-                                fileiraTemp = 0;
-                            }
-                            LimpaBuffer();
-                            fileiraTemp--;
-
-                            printf("Insira o número do assento (Ingresso #%i) > ", i + 1);
-                            if (!scanf("%d", &assentoTemp)) {
-                                assentoTemp = 0;
-                            }
-                            LimpaBuffer();
-                            assentoTemp--;
-
-                            if(cinema[fileiraTemp][assentoTemp] == 0 && fileiraTemp >= 0 && fileiraTemp < FILEIRAS && assentoTemp >= 0 && assentoTemp < ASSENTOS){
-                                cinema[fileiraTemp][assentoTemp] = 1;
-                            } else {
-                                printf("Não foi possível selecionar esse assento!\n");
-                                i--;
-                                system("pause");
-                            }
+                        printf("Insira a fileira do assento (Ingresso #%i) > ", i + 1);
+                        if (!scanf("%d", &fileiraTemp)) {
+                            fileiraTemp = 0;
+                        }
+                        LimpaBuffer();
+                        fileiraTemp--;
+                        printf("Insira o número do assento (Ingresso #%i) > ", i + 1);
+                        if (!scanf("%d", &assentoTemp)) {
+                            assentoTemp = 0;
+                        }
+                        LimpaBuffer();
+                        assentoTemp--;
+                        if(cinema[fileiraTemp][assentoTemp] == 0 && matrizTemp[fileiraTemp][assentoTemp] == 0 && fileiraTemp >= 0 && fileiraTemp < FILEIRAS && assentoTemp >= 0 && assentoTemp < ASSENTOS){
+                            matrizTemp[fileiraTemp][assentoTemp] = 1;
+                            ingressosEscolhidos++;
+                        } else {
+                            printf("Não foi possível selecionar esse assento!\n");
+                            i--;
+                            system("pause");
                         }
                         system("pause");
                         break;
 
+                    case 3:
+                        do{
+                            printf("O que deseja fazer? (1. Cancelar ingresso | 2. Cancelar assento) > ");
+                            scanf("%i", &input);
+                            LimpaBuffer();
+                            if(input == 1){
+                                {
+                                    ingressosTemp = ingressos[0];
+                                    do{
+                                        system("cls");
+                                        printf("Quantos ingressos deseja cancelar? > ");
+                                        scanf("%i", &cancelaTotal);
+                                        LimpaBuffer();
+
+                                        printf("\n");
+
+                                        if(cancelaTotal <= 0 || cancelaTotal > ingressosTemp){
+                                            printf("Você só pode cancelar entre 1 e %i ingressos.\n", ingressosTemp);
+                                            system("pause");
+                                            system("cls");
+                                            continue;
+                                        }
+
+                                        if(cancelaTotal == ingressosTemp){
+                                            printf("AVISO: Você deseja cancelar todos os ingressos? Isso irá cancelar sua compra inteira! (1. Sim | 2. Não)");
+                                            scanf("%i", &input);
+                                            LimpaBuffer();
+
+                                            if(input == 1){
+                                                cancelado = 1;
+                                                printf("Compra cancelada com sucesso.\n");
+                                                system("pause");
+                                                system("cls");
+                                            } else {
+                                                if(input == 2){
+                                                    printf("Sua compra não foi cancelada.\n");
+                                                    system("pause");
+                                                    system("cls");
+                                                } else {
+                                                    printf("Isso não é uma alternativa válida!\n");
+                                                    system("pause");
+                                                    system("cls");
+                                                }
+
+                                                cancelaTotal = 0;
+                                            }
+                                        }
+
+                                        if(cancelaTotal > 0 && cancelado != 1){
+                                            if(nIngInteira > 0){
+                                                do {
+                                                    printf("Seus Ingressos:\n");
+                                                    printf("Inteira: %i\n\n", nIngInteira);
+                                                    printf("Meia: %i\n", nIngMeia);
+                                                    printf("Quantos ingressos inteira deseja cancelar? > ");
+                                                    scanf("%i", &cancelaInteira);
+                                                    LimpaBuffer();
+
+                                                    if(cancelaInteira < 0 || cancelaInteira > cancelaTotal || cancelaInteira > nIngInteira){
+                                                        system("cls");
+                                                        printf("Número inválido! Você pode cancelar até %i ingressos inteira.\n", cancelaTotal);
+                                                        system("pause");
+                                                        system("cls");
+                                                    }
+                                                } while(cancelaMeia < 0 || cancelaMeia > cancelaTotal || cancelaMeia > nIngMeia);
+
+                                                cancelaMeia = cancelaTotal - cancelaInteira;
+                                            } else {
+                                                cancelaInteira = 0;
+                                                cancelaMeia = cancelaTotal;
+                                            }
+
+                                            nIngMeia -= cancelaMeia;
+                                            nIngInteira -= cancelaInteira;
+                                            ingressos[0] -= cancelaTotal;
+
+                                            printf("Ingressos cancelados com sucesso! %i ingressos meia foram cancelados automáticamente.\n", cancelaTotal);
+                                            system("pause");
+                                            system("cls");
+                                        }
+                                    } while((cancelaTotal <= 0 || cancelaTotal > ingressosTemp) && cancelado != 1);
+
+                                    if(cancelado == 1){
+                                        break;
+                                    }
+                                }
+                            } else {
+                                if(input == 2){
+                                    if(ingressosEscolhidos == 0){
+                                        system("cls");
+                                        printf("Escolha pelo menos um assento antes de prosseguir!\n");
+                                        system("pause");
+                                        system("cls");
+                                    } else {
+                                        do{
+                                            printf("\nQuantos assentos você deseja cancelar? (Assentos disponíveis: %i) > ", ingressosEscolhidos);
+                                            scanf("%i", &cancelaTotal);
+                                            LimpaBuffer();
+
+                                            if(cancelaTotal > ingressosEscolhidos){
+                                                printf("Número inválido! Você pode cancelar até %i assentos.\n", ingressosEscolhidos);
+                                            } else {
+                                                do{
+                                                    if(cancelaTotal == ingressosEscolhidos){
+                                                        printf("Deseja realmente cancelar todos os assentos? (1. Sim | 2. Não) > ");
+                                                        scanf("%i", &input);
+                                                        LimpaBuffer();
+
+                                                        if(input == 1){
+                                                            for(i = 0; i < FILEIRAS; i++){
+                                                                for(j = 0; j < ASSENTOS; j++){
+                                                                    matrizTemp[i][j] = 0;
+                                                                }
+                                                            }
+
+                                                            system("cls");
+                                                            printf("Todos os assentos foram cancelados com sucesso.\n");
+                                                            system("pause");
+                                                            system("cls");
+                                                        } else {
+                                                            system("cls");
+                                                            printf("Seus assentos não foram cancelados!\n");
+                                                            system("pause");
+                                                            system("cls");
+                                                        }
+                                                    }
+                                                }while(input != 1 && input != 2);
+                                            }
+
+                                            system("cls");
+                                            printf("Assentos disponíveis para cancelar: \n");
+                                            for(i = 0; i < FILEIRAS; i++){
+                                                for(j = 0; j < ASSENTOS; j++){
+                                                    if(matrizTemp[i][j] == 1){
+                                                        printf("Fileira %i, Assento %i\n", i+1, j+1);
+                                                    }
+                                                }
+                                            }
+                                            printf("\n\n");
+                                            
+                                            for(i = 0; i < cancelaTotal; i++){
+                                                printf("Insira a fileira do assento que você deseja cancelar (%i/%i) > ", i + 1, cancelaTotal);
+                                                if (!scanf("%d", &fileiraTemp)) {
+                                                    fileiraTemp = 0;
+                                                }
+                                                LimpaBuffer();
+                                                fileiraTemp--;
+
+                                                printf("Insira o número do assento que você deseja cancelar (%i/%i) > ", i + 1, cancelaTotal);
+                                                if (!scanf("%d", &assentoTemp)) {
+                                                    assentoTemp = 0;
+                                                }
+                                                LimpaBuffer();
+                                                assentoTemp--;
+
+                                                if(cinema[fileiraTemp][assentoTemp] == 0 && matrizTemp[fileiraTemp][assentoTemp] == 1 && fileiraTemp >= 0 && fileiraTemp < FILEIRAS && assentoTemp >= 0 && assentoTemp < ASSENTOS){
+                                                    matrizTemp[fileiraTemp][assentoTemp] = 0;
+                                                    ingressosEscolhidos--;
+                                                } else {
+                                                    printf("Não foi possível cancelar esse assento!\n");
+                                                    i--;
+                                                    system("pause");
+                                                }
+                                                system("pause");
+                                            }
+                                        }while(cancelaTotal > ingressosEscolhidos);
+                                        
+                                    }
+                                } else {
+                                    printf("Isso não é um comando válido!\n");
+                                    system("pause");
+                                    system("cls");
+                                }
+                            }
+                        } while(input != 1 && input != 2 && cancelado != 0);
+                        input = 3;
+                        break;
+                        
+                        
                     default:
                         system("cls");
                         printf("Comando Inválido!\n");
@@ -508,7 +678,7 @@ int main() {
 
                         break;
                 }
-            } while (input != 2 && cancelado != 1);
+            }while ((input != 4 && ingressosEscolhidos != ingressos[0]) && cancelado != 1);
 
             if(cancelado != 1){
                 do{
@@ -555,6 +725,11 @@ int main() {
                             break;
 
                         case 2:
+                            for(i = 0; i<FILEIRAS; i++){
+                                for(j = 0; j<ASSENTOS; j++){
+                                    cinema[i][j] += matrizTemp[i][j];
+                                }
+                            }
                             break;
 
                         default:
