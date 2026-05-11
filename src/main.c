@@ -7,23 +7,6 @@
 # define METADELIN FILEIRAS / 2
 # define METADECOL ASSENTOS / 2
 
-/*
-Guia de refatoração caso os caractéres corrompam denovo:
-
-INVÁLIDO
-Próxima Sessão
-Disponíveis
-máximo
-Não
-Inválido
-Sugestões
-lógica
-Disponível
-número
-Não foi possível
-
-*/
-
 void LimpaBuffer() {
     int c;
     while(c = getchar() != '\n' && c != EOF);
@@ -31,9 +14,10 @@ void LimpaBuffer() {
 
 int main() {
     int cinema[FILEIRAS][ASSENTOS] = {0}, matrizTemp[FILEIRAS][ASSENTOS] = {0}, fileiraTemp, assentoTemp, i, j, k, jk, grupo;
+
     int incomodo, incomodoFileiras, menosIncomodo, minEsquerdo = 0, fil = 0, recomendEsquerdo[2], recomendDireito[2], recomendFil[2];
 
-    int input, desligado, cancelado = 0, ingressosEscolhidos, cancelaMeia = 0, cancelaInteira = 0, cancelaTotal = 0, ingressosTemp = 0;
+    int input, desligado, cancelado = 0, ingressosEscolhidos, cancelaTotal = 0;
 
     int criticaS = 0, criticaN = 0;
 
@@ -51,32 +35,26 @@ int main() {
         return 1;
     }
 
-    for(i = 0; i<FILEIRAS; i++){
-        somaAssentos = 0;
-        for(j = 0; j < ASSENTOS; j++){
-            somaAssentos += cinema[i][j];
-        }
-        assentosDisponiveis -= somaAssentos;
-    }
-
     do {
         if (cancelado != 1) {
             assentosDisponiveis -= ingressos[0];
         }
-        input = 0, desligado = 0, cancelado = 0, nIngMeia = 0, nIngInteira = 0, ingressos[0] = 0, ingressos[1] = 0, fileiraTemp = 0, assentoTemp = 0, dividir = 0, ingressosEscolhidos = 0;
 
-        // PRIMEIRA TELA
+        input = 0, desligado = 0, cancelado = 0;
+        nIngMeia = 0, nIngInteira = 0, ingressos[0] = 0, ingressos[1] = 0;
+        fileiraTemp = 0, assentoTemp = 0, dividir = 0, ingressosEscolhidos = 0;
+
         do {
 
-            assentosOcupados = (FILEIRAS * ASSENTOS) - assentosDisponiveis;
             input = 0;
+            assentosOcupados = (FILEIRAS * ASSENTOS) - assentosDisponiveis;
 
             system("cls");
             ingressos[0] = nIngInteira + nIngMeia;
             printf("+------------------------------------------------------------------------------+\n");
             printf("|                          Bem vindo! | Cinemas CineC                          |\n");
             printf("+------------------------------------------------------------------------------+\n");
-            printf("|                        Percentual de Ocupação: %5.1f%%                        |\n", ((float)assentosOcupados/(FILEIRAS * ASSENTOS))*100);
+            printf("|                        Percentual de Ocupação: %5.1f%%                        |\n", ((float)assentosOcupados / (FILEIRAS * ASSENTOS)) * 100);
             printf("|                        Assentos Ocupados:      %3i                           |\n", assentosOcupados);
             printf("|                        Assentos Disponíveis:   %3i                           |\n", assentosDisponiveis);
             printf("+------------------------------------------------------------+-----------------+\n");
@@ -87,7 +65,7 @@ int main() {
             printf("|                                                            |                 |\n");
             printf("|       Meia Entrada..........................R$ %5.2f       |Total:           |\n",valorMedia);
             printf("|                                                            |- %02i Ingressos   |\n", ingressos[0]);
-            printf("|                                                            |- R$%6.2f       |\n", (nIngInteira*valorInteira + nIngMeia*valorMedia));
+            printf("|                                                            |- R$%6.2f       |\n", (nIngInteira * valorInteira + nIngMeia * valorMedia));
             printf("|*  O cliente pode comprar no máximo %2d ingressos de uma vez.|                 |\n", ASSENTOS * 2);
             printf("|                                                            |                 |\n");
             printf("+------------------------------------------------------------+-----------------+\n");
@@ -148,7 +126,6 @@ int main() {
             }
         } while(input != 4 && desligado != 1);
 
-        // SEGUNDA TELA
         if (desligado != 1) {
             recomendEsquerdo[0] = 0;
             recomendEsquerdo[1] = 0;
@@ -240,12 +217,7 @@ int main() {
             ingressos[0] += ingressos[1];
             ingressos[1] = 0;
 
-
-
-
-
             do {
-                // Mais vazia e mais cheia
 
                 somaMaisVazia = ASSENTOS, somaMaisCheia = 0;
 
@@ -357,7 +329,7 @@ int main() {
                             printf(" | !:  Fileira Mais Cheia    |                        |\n");
                             break;
                         case 1:
-                            printf(" | *:  Fileira Mais Vazia    |------------------------|\n", nIngMeia, nIngMeia*valorMedia);
+                            printf(" | *:  Fileira Mais Vazia    |------------------------|\n");
                             break;
                         case 2:
                             printf(" | #x: Fileira Crítica       |  Fileira  |  Assentos  |\n");
@@ -501,7 +473,6 @@ int main() {
                                 ingressosEscolhidos++;
                             } else {
                                 printf("Não foi possível selecionar esse assento!\n");
-                                i--;
                             }
                             system("pause");
                         } else {
